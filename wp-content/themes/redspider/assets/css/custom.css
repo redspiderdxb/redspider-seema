@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .hero-banner{ padding-top:100px ;}
 
 .rs-full-section {
