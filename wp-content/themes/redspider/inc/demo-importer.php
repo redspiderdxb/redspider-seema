@@ -539,6 +539,7 @@ function redspider_run_demo_import()
   // Set default customize settings
   set_theme_mod('whatsapp_number', '971505698733');
   set_theme_mod('consultation_url', '#');
+  set_theme_mod('consultation_text', 'Schedule Free Consultation');
   set_theme_mod('footer_heading', 'Power up your website <br> with <span>our experts</span>');
   set_theme_mod('footer_email_title', 'Got Questions?');
   set_theme_mod('footer_email', 'info@redspider.ae');
@@ -561,63 +562,240 @@ function redspider_demo_importer_page()
   }
   ?>
 
-  <div class="wrap" style="margin-top: 30px; max-width: 800px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;">
-    <div style="background: #111; color: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-left: 6px solid #DE1515;">
-      
-      <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 25px;">
-        <div style="background: #DE1515; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: bold; color: #fff; box-shadow: 0 4px 15px rgba(222, 21, 21, 0.4);">
-          RS
-        </div>
+  <div class="wrap rs-importer-wrap">
+    <div class="rs-importer-card">
+      <div class="rs-importer-header">
+        <div class="rs-logo-badge">RS</div>
         <div>
-          <h1 style="color: #fff; font-size: 28px; font-weight: 700; margin: 0; line-height: 1.2;">RedSpider Demo Importer</h1>
-          <p style="color: #aaa; margin: 5px 0 0 0; font-size: 14px;">Set up your WordPress theme to match the HTML design in seconds</p>
+          <h2>RedSpider Demo Importer</h2>
+          <p>Set up your WordPress theme to match the HTML design in seconds.</p>
         </div>
       </div>
 
-      <hr style="border: 0; border-top: 1px solid #333; margin: 25px 0;">
-
       <?php if (!empty($message)) : ?>
-        <div style="background: rgba(46, 204, 113, 0.1); border: 1px solid #2ecc71; color: #2ecc71; padding: 15px 20px; border-radius: 8px; margin-bottom: 25px; font-size: 15px;">
-          <strong>✓</strong> <?php echo esc_html($message); ?>
+        <div class="rs-alert rs-alert-success">
+          <span class="rs-alert-icon">✓</span> <?php echo esc_html($message); ?>
         </div>
       <?php endif; ?>
 
-      <div style="background: #1e1e1e; padding: 25px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #292929;">
-        <h3 style="color: #fff; margin-top: 0; font-size: 18px; font-weight: 600;">What will be imported/configured?</h3>
-        <ul style="margin: 15px 0 0 0; padding-left: 20px; color: #ccc; line-height: 1.8; font-size: 14px;">
-          <li>Create all 15 template pages (Home, About Us, Contact Us, and 12 service/product pages).</li>
-          <li>Assign template files dynamically to all page styles.</li>
-          <li>Configure default WordPress front page settings to load the static Homepage.</li>
-          <li>Create and populate multi-level "Primary Menu" and "Footer Menu" automatically.</li>
-          <li>Set up dynamic Customizer social link controls and defaults.</li>
+      <div class="rs-features-box">
+        <h4><?php _e('What will be imported and configured?', 'redspider'); ?></h4>
+        <ul>
+          <li>
+            <span class="rs-bullet">✓</span>
+            <div>
+              <strong>15 Design Pages</strong>
+              <p>Creates Home, About Us, Contact Us, and 12 service/product pages.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rs-bullet">✓</span>
+            <div>
+              <strong>Dynamic Templates Assignment</strong>
+              <p>Links template files automatically to matching WordPress page layouts.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rs-bullet">✓</span>
+            <div>
+              <strong>Homepage Configuration</strong>
+              <p>Sets the static front page configuration to default to your newly created Home page.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rs-bullet">✓</span>
+            <div>
+              <strong>Multi-Level Menus Setup</strong>
+              <p>Builds the multi-level Primary Menu and Footer Menu automatically.</p>
+            </div>
+          </li>
+          <li>
+            <span class="rs-bullet">✓</span>
+            <div>
+              <strong>Customizer Integration</strong>
+              <p>Populates contact settings, footer info, social handles, and dynamic content links.</p>
+            </div>
+          </li>
         </ul>
       </div>
 
-      <form method="post" action="">
+      <form method="post" action="" class="rs-importer-form">
         <?php wp_nonce_field('redspider_import_demo_action', 'redspider_import_demo_nonce'); ?>
-        <button type="submit" name="redspider_import_demo" class="button button-primary button-hero" style="background: #DE1515; border-color: #DE1515; color: #fff; font-weight: 600; padding: 12px 30px; height: auto; line-height: 1.5; border-radius: 6px; box-shadow: 0 4px 15px rgba(222, 21, 21, 0.3); transition: all 0.2s ease-in-out; cursor: pointer; font-size: 16px;">
+        <button type="submit" name="redspider_import_demo" class="rs-btn rs-btn-primary rs-btn-large">
           <?php _e('Import RedSpider Demo Content', 'redspider'); ?>
         </button>
       </form>
       
-      <p style="color: #666; font-size: 12px; margin-top: 20px; margin-bottom: 0;">
-        * This operation will reset/override menu configurations for the "Primary Menu" and "Footer Menu" if they already exist, to ensure proper layout hierarchy.
+      <p class="rs-warning-notice">
+        * <?php _e('This operation will reset/override menu configurations for the "Primary Menu" and "Footer Menu" if they already exist, to ensure proper layout hierarchy.', 'redspider'); ?>
       </p>
 
     </div>
   </div>
 
   <style>
-    .button-hero:hover {
-      background: #c00f0f !important;
-      border-color: #c00f0f !important;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(222, 21, 21, 0.4) !important;
+    .rs-importer-wrap {
+      margin: 25px auto 50px auto;
+      max-width: 900px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     }
-    .button-hero:active {
+    .rs-importer-card {
+      background: #111;
+      color: #e5e5e5;
+      padding: 40px;
+      border-radius: 12px;
+      border-left: 6px solid #DE1515;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .rs-importer-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 25px;
+    }
+    .rs-logo-badge {
+      background: #DE1515;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 800;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(222, 21, 21, 0.4);
+      flex-shrink: 0;
+    }
+    .rs-importer-header h2 {
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .rs-importer-header p {
+      color: #999;
+      margin: 5px 0 0 0;
+      font-size: 14px;
+    }
+    .rs-features-box {
+      background: #1a1a1a;
+      border: 1px solid #282828;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    .rs-features-box h4 {
+      color: #DE1515;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .rs-features-box ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 15px;
+    }
+    .rs-features-box li {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+    .rs-bullet {
+      background: rgba(46, 204, 113, 0.15);
+      color: #2ecc71;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    .rs-features-box li strong {
+      color: #fff;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .rs-features-box li p {
+      color: #aaa;
+      margin: 0;
+      font-size: 13px;
+    }
+    .rs-alert {
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rs-alert-success {
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+    }
+    .rs-alert-icon {
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .rs-btn {
+      background: #252525;
+      color: #fff;
+      border: 1px solid #3a3a3a;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      outline: none;
+    }
+    .rs-btn:hover {
+      background: #333;
+      border-color: #444;
+      color: #fff;
+    }
+    .rs-btn-primary {
+      background: #DE1515;
+      border-color: #DE1515;
+      color: #fff;
+    }
+    .rs-btn-primary:hover {
+      background: #c00f0f;
+      border-color: #c00f0f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(222, 21, 21, 0.3);
+    }
+    .rs-btn-primary:active {
       transform: translateY(1px);
     }
+    .rs-btn-large {
+      padding: 14px 35px;
+      font-size: 16px;
+    }
+    .rs-warning-notice {
+      color: #666;
+      font-size: 12px;
+      margin-top: 20px;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
   </style>
-
   <?php
 }

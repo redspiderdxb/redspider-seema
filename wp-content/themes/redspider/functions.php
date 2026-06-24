@@ -179,6 +179,19 @@ function redspider_customize_register($wp_customize)
     ]
   );
 
+  $wp_customize->add_setting('consultation_text', [
+    'default' => 'Schedule Free Consultation',
+  ]);
+
+  $wp_customize->add_control(
+    'consultation_text',
+    [
+      'label'   => __('Consultation Button Text', 'redspider'),
+      'section' => 'redspider_contact',
+      'type'    => 'text',
+    ]
+  );
+
   // Add Footer Settings Section
   $wp_customize->add_section(
     'redspider_footer',
@@ -371,7 +384,7 @@ add_action('wp_ajax_nopriv_redspider_contact_submit', 'redspider_contact_submit_
 function redspider_theme_activation_redirect()
 {
   global $pagenow;
-  if (is_admin() && 'themes.php' === $pagenow && isset($_GET['activated'])) {
+  if (is_admin() && 'themes.php' === $pagenow && isset($_GET['activated']) && (!isset($_GET['page']) || $_GET['page'] !== 'redspider-demo-importer')) {
     // Only run if not already imported to prevent reset/loop
     if (get_option('redspider_demo_imported') !== 'yes') {
       redspider_run_demo_import();

@@ -228,77 +228,116 @@ h6 {
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 15px 0;
+  padding: 12px 0;
   transition: all 0.5s;
   z-index: 997;
+  width: 100%;
 }
 
+/* Inner wrapper: logo | nav | actions | toggle */
+.rs-header-inner {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 10px;
+}
+
+/* ── Logo ── */
 .header .logo {
   line-height: 1;
+  flex-shrink: 0;
 }
 
-.header .logo img {
-  max-height: 36px;
-  margin-right: 8px;
+.header .logo img,
+.header .logo .custom-logo {
+  max-height: 48px;
+  width: auto;
+  display: block;
 }
 
-.header .logo h1 {
-  font-size: 30px;
-  margin: 0;
-  font-weight: 700;
-  color: var(--heading-color);
-}
-
-.header .cta-btn,
-.header .cta-btn:focus {
-  color: var(--contrast-color);
+/* ── Consultation button ── */
+.rs-consult-btn {
+  white-space: nowrap;
+  flex-shrink: 0;
   font-size: 13px;
-  padding: 7px 25px;
-  margin: 0 0 0 30px;
-  border-radius: 4px;
-  transition: 0.3s;
-  text-transform: uppercase;
-  border: 2px solid var(--contrast-color);
+  padding: 9px 16px !important;
 }
 
-.header .cta-btn:hover,
-.header .cta-btn:focus:hover {
-  color: var(--contrast-color);
-  background: var(--accent-color);
-  border-color: var(--accent-color);
-}
-
-@media (max-width: 1200px) {
-  .header .logo {
-    order: 1;
+/* ── On xs/sm: icon-only (square pill) ── */
+@media (max-width: 767px) {
+  .rs-consult-btn {
+    padding: 9px 12px !important;
+    min-width: 0;
   }
-
-  .header .cta-btn {
-    order: 2;
-    margin: 0 15px 0 0;
-    padding: 6px 15px;
+  .header .logo img,
+  .header .logo .custom-logo {
+    max-height: 38px;
   }
-
-  .header .navmenu {
-    order: 3;
+  .rs-header-inner {
+    padding: 0 12px;
+    gap: 6px;
   }
 }
 
+/* ── On md (768-991) ── */
+@media (min-width: 768px) and (max-width: 991px) {
+  .rs-consult-btn {
+    padding: 9px 14px !important;
+    font-size: 13px;
+  }
+  .header .logo img,
+  .header .logo .custom-logo {
+    max-height: 42px;
+  }
+  .rs-header-inner {
+    padding: 0 16px;
+  }
+}
+
+/* ── On lg (992-1199): tablet landscape ── */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .rs-consult-btn {
+    font-size: 13px;
+    padding: 9px 16px !important;
+  }
+  .rs-header-inner {
+    padding: 0 20px;
+  }
+}
+
+/* ── On xl+ (1200+): desktop ── */
+@media (min-width: 1200px) {
+  .rs-consult-btn {
+    font-size: 14px;
+    padding: 10px 20px !important;
+  }
+  .rs-header-inner {
+    padding: 0 30px;
+  }
+}
+
+/* Scrolled state */
 .scrolled .header {
-  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.25);
+  --background-color: rgba(0, 16, 35, 0.96);
+  padding: 8px 0;
 }
 
-/* Global Header on Scroll
-------------------------------*/
-.scrolled .header {
-  --background-color: rgba(21, 34, 43, 0.85);
-}
 
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
-/* Desktop Navigation */
+
+/* ══════════════════════════════════════════
+   DESKTOP NAV  (≥ 1200px)
+   ══════════════════════════════════════════ */
 @media (min-width: 1200px) {
+
+  /* Hide hamburger on desktop */
+  .mobile-nav-toggle {
+    display: none !important;
+  }
+
   .navmenu {
     padding: 0;
   }
@@ -315,19 +354,19 @@ h6 {
     position: relative;
   }
 
-  .navmenu>ul>li {
+  .navmenu > ul > li {
     white-space: nowrap;
-    padding: 15px 14px;
+    padding: 15px 12px;
   }
 
-  .navmenu>ul>li:last-child {
+  .navmenu > ul > li:last-child {
     padding-right: 0;
   }
 
   .navmenu a,
   .navmenu a:focus {
     color: var(--nav-color);
-    font-size: 16px;
+    font-size: 15px;
     padding: 0 2px;
     font-family: var(--nav-font);
     font-weight: 500;
@@ -348,7 +387,8 @@ h6 {
     transition: 0.3s;
   }
 
-  .navmenu>ul>li>a:before {
+  /* Underline hover bar */
+  .navmenu > ul > li > a::before {
     content: "";
     position: absolute;
     height: 2px;
@@ -356,23 +396,24 @@ h6 {
     left: 0;
     background-color: var(--nav-hover-color);
     visibility: hidden;
-    width: 0px;
+    width: 0;
     transition: all 0.3s ease-in-out 0s;
   }
 
-  .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
-  .navmenu .active:before {
+  .navmenu a:hover::before,
+  .navmenu li:hover > a::before,
+  .navmenu .active::before {
     visibility: visible;
     width: 100%;
   }
 
-  .navmenu li:hover>a,
+  .navmenu li:hover > a,
   .navmenu .active,
   .navmenu .active:focus {
     color: color-mix(in srgb, var(--nav-color) 90%, white 15%);
   }
 
+  /* Dropdown */
   .navmenu .dropdown ul {
     margin: 0;
     padding: 10px 0;
@@ -380,22 +421,19 @@ h6 {
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
+    left: 0;
     top: 130%;
     opacity: 0;
     transition: 0.3s;
     border-radius: 4px;
     z-index: 99;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
-  }
-
-  .navmenu .dropdown ul li {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
     min-width: 200px;
   }
 
   .navmenu .dropdown ul a {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 14px;
     text-transform: none;
     color: var(--nav-dropdown-color);
   }
@@ -406,39 +444,53 @@ h6 {
 
   .navmenu .dropdown ul a:hover,
   .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
+  .navmenu .dropdown ul li:hover > a {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .dropdown:hover>ul {
+  .navmenu .dropdown:hover > ul {
     opacity: 1;
     top: 100%;
     visibility: visible;
   }
 
+  /* Nested dropdown (level 3) */
   .navmenu .dropdown .dropdown ul {
     top: 0;
-    left: -90%;
+    left: 100%;
     visibility: hidden;
   }
 
-  .navmenu .dropdown .dropdown:hover>ul {
+  .navmenu .dropdown .dropdown:hover > ul {
     opacity: 1;
     top: 0;
-    left: -100%;
+    left: 100%;
     visibility: visible;
   }
 }
 
-/* Mobile Navigation */
+/* ══════════════════════════════════════════
+   MOBILE / TABLET NAV  (< 1200px)
+   ══════════════════════════════════════════ */
 @media (max-width: 1199px) {
+
+  /* Hamburger toggle button — always visible on mobile/tablet */
   .mobile-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
     color: var(--nav-color);
-    font-size: 28px;
-    line-height: 0;
-    margin-right: 10px;
+    font-size: 30px;
+    line-height: 1;
     cursor: pointer;
     transition: color 0.3s;
+    z-index: 9999;
+    position: relative;
+    flex-shrink: 0;
+    margin-left: 6px;
+    padding: 4px;
+    min-width: 38px;
+    min-height: 38px;
   }
 
   .navmenu {
@@ -446,115 +498,196 @@ h6 {
     z-index: 9997;
   }
 
-  .navmenu ul {
+  /* ── Top-level <ul>: hidden panel, slides in when active ── */
+  .navmenu > ul {
     display: none;
     list-style: none;
-    position: absolute;
-    inset: 60px 20px 20px 20px;
-    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 88vw);
+    padding: 70px 0 20px;
     margin: 0;
-    border-radius: 6px;
-    background-color: var(--nav-mobile-background-color);
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-    box-shadow: none;
+    border-radius: 10px 0 0 10px;
+    background-color: #fff;
+    border-left: 1px solid rgba(0,0,0,0.08);
+    box-shadow: -6px 0 30px rgba(0,0,0,0.18);
     overflow-y: auto;
-    transition: 0.3s;
+    overflow-x: hidden;
     z-index: 9998;
+    transition: transform 0.35s ease;
   }
 
+  /* ── All nested <ul> (submenus) ── */
+  .navmenu ul ul {
+    display: none;
+    list-style: none;
+    position: static !important;
+    inset: auto !important;
+    padding: 4px 0 8px 0;
+    margin: 0 12px 8px 12px;
+    background-color: #f7f9fc;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.07);
+    box-shadow: none;
+    overflow: visible;
+    z-index: auto;
+  }
+
+  /* ── Nav links ── */
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
-    padding: 10px 20px;
+    color: #1a1a2e;
+    padding: 12px 20px;
     font-family: var(--nav-font);
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    white-space: nowrap;
-    transition: 0.3s;
+    white-space: normal;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background 0.2s, color 0.2s;
   }
 
+  .navmenu > ul > li:last-child > a {
+    border-bottom: none;
+  }
+
+  .navmenu a:hover,
+  .navmenu a:focus:hover {
+    background: rgba(222, 21, 21, 0.04);
+    color: var(--nav-dropdown-hover-color);
+  }
+
+  /* Chevron icon */
   .navmenu a i,
   .navmenu a:focus i {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 0;
-    margin-left: 5px;
-    width: 30px;
-    height: 30px;
+    margin-left: 8px;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: 0.3s;
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
+    transition: background 0.25s, transform 0.3s;
+    background-color: rgba(222, 21, 21, 0.08);
+    color: #de1515;
+    cursor: pointer;
   }
 
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
+  .navmenu a i:hover {
     background-color: var(--accent-color);
-    color: var(--contrast-color);
+    color: #fff;
   }
 
-  .navmenu a:hover,
+  /* Active chevron rotates */
+  .navmenu .active > a i,
+  .navmenu a.active i {
+    background-color: var(--accent-color);
+    color: #fff;
+    transform: rotate(180deg);
+  }
+
+  /* Submenu link style */
+  .navmenu ul ul a {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    color: #333;
+  }
+
+  .navmenu ul ul a:last-child {
+    border-bottom: none;
+  }
+
+  /* ── Show submenu on .dropdown-active ── */
+  .navmenu .dropdown > ul.dropdown-active,
+  .navmenu li.dropdown > ul.dropdown-active {
+    display: block !important;
+  }
+
+  .navmenu .dropdown .dropdown > ul.dropdown-active {
+    display: block !important;
+    margin-left: 10px;
+  }
+
+  /* ── Active nav state ── */
   .navmenu .active,
   .navmenu .active:focus {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color);
-    color: var(--contrast-color);
-    transform: rotate(180deg);
-  }
-
-  .navmenu .dropdown ul {
-    position: static;
-    display: none;
-    z-index: 99;
-    padding: 10px 0;
-    margin: 10px 20px;
-    background-color: var(--nav-dropdown-background-color);
-    transition: all 0.5s ease-in-out;
-  }
-
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1);
-  }
-
-  .navmenu .dropdown>.dropdown-active {
-    display: block;
-    background-color: rgba(33, 37, 41, 0.03);
-  }
-
+  /* ────────────────────────────────────────
+     OVERLAY + OPEN STATE
+     ──────────────────────────────────────── */
   .mobile-nav-active {
     overflow: hidden;
   }
 
+  /* Dark overlay behind the panel */
+  .mobile-nav-active::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9996;
+  }
+
+  /* X button when open */
   .mobile-nav-active .mobile-nav-toggle {
     color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
-    margin-right: 0;
+    position: fixed;
+    font-size: 28px;
+    top: 14px;
+    right: calc(min(320px, 88vw) + 10px);
+    margin: 0;
     z-index: 9999;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
   }
 
+  /* Nav panel fills the sidebar */
   .mobile-nav-active .navmenu {
     position: fixed;
-    overflow: hidden;
     inset: 0;
-    background: rgba(33, 37, 41, 0.8);
-    transition: 0.3s;
+    z-index: 9997;
+    /* background handled by ::before overlay */
   }
 
-  .mobile-nav-active .navmenu>ul {
+  /* Show the side panel */
+  .mobile-nav-active .navmenu > ul {
     display: block;
   }
+
+  /* ────────────────────────────────────────
+     CLOSE BUTTON (×) inside the panel
+     ──────────────────────────────────────── */
+  .mobile-nav-active .navmenu > ul::before {
+    content: "✕";
+    display: block;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    font-size: 22px;
+    color: #555;
+    cursor: pointer;
+    pointer-events: none; /* JS toggle handles it */
+  }
 }
+
 
 /*--------------------------------------------------------------
 # Global Footer

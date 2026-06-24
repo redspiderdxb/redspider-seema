@@ -32,31 +32,79 @@
     mobileNavToggleBtn.classList.toggle('bi-list');
     mobileNavToggleBtn.classList.toggle('bi-x');
   }
-  mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  }
 
   /**
-   * Hide mobile nav on same-page/hash links
+   * Close mobile nav when clicking the dark overlay (body::before)
    */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
+  document.addEventListener('click', function(e) {
+    if (!document.querySelector('.mobile-nav-active')) return;
+    const navPanel = document.querySelector('.navmenu > ul');
+    const toggleBtn = document.querySelector('.mobile-nav-toggle');
+    // If click is outside the nav panel and not on the toggle button, close
+    if (navPanel && !navPanel.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
       if (document.querySelector('.mobile-nav-active')) {
         mobileNavToogle();
       }
-    });
+    }
+  });
 
+  /**
+   * Hide mobile nav on same-page/hash links (leaf items only)
+   */
+  document.querySelectorAll('#navmenu a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      if (document.querySelector('.mobile-nav-active')) {
+        // Don't close if clicking a dropdown parent (let chevron handle it)
+        if (this.closest('li.dropdown')) {
+          return;
+        }
+        mobileNavToogle();
+      }
+    });
   });
 
   /**
    * Toggle mobile nav dropdowns
    */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function(e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
+  document.querySelectorAll('.navmenu li.dropdown > a').forEach(function(navLink) {
+    navLink.addEventListener('click', function(e) {
+      // Only intercept on mobile/tablet navigation view
+      if (!document.querySelector('.mobile-nav-active')) return;
+
+      var href = this.getAttribute('href');
+      var isChevronClick = e.target.classList.contains('toggle-dropdown') || e.target.closest('.toggle-dropdown');
+
+      // If the link is a placeholder/hash link OR the user explicitly clicked the chevron:
+      if (href === '#' || href === '' || !href || isChevronClick) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var parentLink = this;
+        var parentLi   = this.closest('li.dropdown');
+        var submenu    = parentLi ? parentLi.querySelector(':scope > ul') : null;
+
+        // Close all other submenus and deactivate their parent links (respecting parent-child hierarchy)
+        document.querySelectorAll('.navmenu ul.dropdown-active').forEach(function(openSubmenu) {
+          if (openSubmenu !== submenu && !openSubmenu.contains(parentLi)) {
+            openSubmenu.classList.remove('dropdown-active');
+          }
+        });
+        document.querySelectorAll('.navmenu a.active').forEach(function(activeLink) {
+          if (activeLink !== parentLink && !activeLink.closest('li.dropdown').contains(parentLi)) {
+            activeLink.classList.remove('active');
+          }
+        });
+
+        if (parentLink) parentLink.classList.toggle('active');
+        if (submenu)    submenu.classList.toggle('dropdown-active');
+      }
     });
   });
+
 
   /**
    * Preloader

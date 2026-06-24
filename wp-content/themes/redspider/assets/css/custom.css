@@ -2796,3 +2796,95 @@ p{ line-height: 1.7;}
 .rs-social-list img {
   vertical-align: middle;
 }
+
+/* ================================================================
+   RESPONSIVE HEADER — all breakpoints
+   ================================================================ */
+
+/* ── Base hero banner padding (accounts for fixed header) ── */
+.hero-banner { padding-top: 80px; }
+
+/* ── xs: phones ≤ 480px ── */
+@media (max-width: 480px) {
+  .hero-banner { padding-top: 70px; }
+  .header { padding: 10px 0; }
+  .rs-consult-btn .btn-title { display: inline-block !important; font-size: 9px !important; font-weight: 700; text-transform: uppercase; }
+  .rs-consult-btn { padding: 6px 8px !important; border-radius: 6px; gap: 3px !important; }
+  .rs-consult-btn .btn-icon-wrap img { width: 14px !important; }
+  .header .logo img,
+  .header .logo .custom-logo { max-height: 30px; }
+  .mobile-nav-toggle { font-size: 24px !important; margin-left: 5px; }
+  .rs-header-inner { gap: 6px !important; padding: 0 10px !important; }
+}
+
+/* ── sm: phones 481-767px ── */
+@media (min-width: 481px) and (max-width: 767px) {
+  .hero-banner { padding-top: 76px; }
+  .rs-consult-btn .btn-title { display: inline-block !important; font-size: 11px !important; font-weight: 700; text-transform: uppercase; }
+  .rs-consult-btn { padding: 7px 12px !important; gap: 5px !important; }
+  .rs-consult-btn .btn-icon-wrap img { width: 16px !important; }
+  .header .logo img,
+  .header .logo .custom-logo { max-height: 36px; }
+  .rs-header-inner { gap: 8px !important; }
+}
+
+/* ── md: tablets 768-991px ── */
+@media (min-width: 768px) and (max-width: 991px) {
+  .hero-banner { padding-top: 80px; }
+  .rs-consult-btn .btn-title { display: inline-block !important; font-size: 12px !important; }
+  .rs-consult-btn { padding: 8px 14px !important; gap: 6px !important; }
+  .rs-consult-btn .btn-icon-wrap img { width: 16px !important; }
+  .header .logo img,
+  .header .logo .custom-logo { max-height: 40px; }
+}
+
+/* ── lg: tablet landscape 992-1199px ── */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .hero-banner { padding-top: 82px; }
+  .rs-consult-btn .btn-title { display: inline-block !important; }
+  .rs-consult-btn { padding: 9px 16px !important; font-size: 13px; }
+  .header .logo img,
+  .header .logo .custom-logo { max-height: 44px; }
+}
+
+/* ── xl+: desktop ≥ 1200px ── */
+@media (min-width: 1200px) {
+  .hero-banner { padding-top: 90px; }
+  .rs-consult-btn .btn-title { display: inline-block !important; }
+  .rs-consult-btn { padding: 10px 22px !important; font-size: 14px; }
+  .rs-header-inner { gap: 12px; }
+  .header .logo img,
+  .header .logo .custom-logo { max-height: 50px; }
+}
+
+/* ── xxl: large screens ≥ 1400px ── */
+@media (min-width: 1400px) {
+  .rs-header-inner { padding: 0 40px; }
+}
+
+/* ── Ensure mobile hamburger is always visible and tappable ── */
+@media (max-width: 1199px) {
+  .mobile-nav-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+/* ── Mobile nav panel header branding ── */
+@media (max-width: 1199px) {
+  .mobile-nav-active .navmenu > ul {
+    /* Panel slides in from the right */
+    animation: slideInPanel 0.3s ease forwards;
+  }
+  .mobile-nav-active #header {
+    z-index: 10000 !important;
+  }
+}
+
+@keyframes slideInPanel {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
