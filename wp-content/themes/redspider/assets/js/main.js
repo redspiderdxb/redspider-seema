@@ -89,12 +89,14 @@
 
         // Close all other submenus and deactivate their parent links (respecting parent-child hierarchy)
         document.querySelectorAll('.navmenu ul.dropdown-active').forEach(function(openSubmenu) {
-          if (openSubmenu !== submenu && !openSubmenu.contains(parentLi)) {
+          var openLi = openSubmenu.closest('li.dropdown');
+          if (openSubmenu !== submenu && openLi && !openLi.contains(parentLi)) {
             openSubmenu.classList.remove('dropdown-active');
           }
         });
-        document.querySelectorAll('.navmenu a.active').forEach(function(activeLink) {
-          if (activeLink !== parentLink && !activeLink.closest('li.dropdown').contains(parentLi)) {
+        document.querySelectorAll('.navmenu li.dropdown > a.active').forEach(function(activeLink) {
+          var activeLi = activeLink.closest('li.dropdown');
+          if (activeLink !== parentLink && activeLi && !activeLi.contains(parentLi)) {
             activeLink.classList.remove('active');
           }
         });
@@ -240,14 +242,19 @@
   function navmenuScrollspy() {
     navmenulinks.forEach(navmenulink => {
       if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
+      if (navmenulink.hash === '#' || navmenulink.hash === '#/') return;
+      try {
+        let section = document.querySelector(navmenulink.hash);
+        if (!section) return;
+        let position = window.scrollY + 200;
+        if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+          document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+          navmenulink.classList.add('active');
+        } else {
+          navmenulink.classList.remove('active');
+        }
+      } catch (err) {
+        // Silently ignore invalid selectors
       }
     })
   }

@@ -383,17 +383,14 @@ add_action('wp_ajax_nopriv_redspider_contact_submit', 'redspider_contact_submit_
 // Theme activation handler: run demo importer automatically on activation
 function redspider_theme_activation_redirect()
 {
-  global $pagenow;
-  if (is_admin() && 'themes.php' === $pagenow && isset($_GET['activated']) && (!isset($_GET['page']) || $_GET['page'] !== 'redspider-demo-importer')) {
-    // Only run if not already imported to prevent reset/loop
-    if (get_option('redspider_demo_imported') !== 'yes') {
-      redspider_run_demo_import();
-    }
-    wp_safe_redirect(admin_url('themes.php?page=redspider-demo-importer&activated=1'));
-    exit;
+  // Only run if not already imported to prevent reset/loop
+  if (get_option('redspider_demo_imported') !== 'yes') {
+    redspider_run_demo_import();
   }
+  wp_safe_redirect(admin_url('themes.php?page=redspider-demo-importer&activated=1'));
+  exit;
 }
-add_action('after_setup_theme', 'redspider_theme_activation_redirect');
+add_action('after_switch_theme', 'redspider_theme_activation_redirect');
 
 // Custom walker for footer menu to append 01, 02, etc.
 class RedSpider_Footer_Walker extends Walker_Nav_Menu
