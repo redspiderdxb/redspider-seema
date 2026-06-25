@@ -2913,3 +2913,215 @@ p{ line-height: 1.7;}
   from { transform: translateX(100%); }
   to   { transform: translateX(0); }
 }
+
+/* ── Dynamic Google Reviews Styles ── */
+.rs-reviews-container {
+  padding: 10px 0;
+}
+
+.rs-google-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background: transparent;
+}
+
+.rs-summary-status {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.rs-summary-stars {
+  display: flex;
+  gap: 4px;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.rs-summary-based {
+  font-size: 13.5px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.rs-google-logo {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  font-family: "Product Sans", "Outfit", "Inter", sans-serif;
+  user-select: none;
+}
+
+.rs-google-logo span {
+  display: inline-block;
+}
+
+.rs-google-logo .g-blue { color: #4285F4; }
+.rs-google-logo .o-red { color: #EA4335; }
+.rs-google-logo .o-yellow { color: #FBBC05; }
+.rs-google-logo .l-green { color: #34A853; }
+.rs-google-logo .e-red { color: #EA4335; }
+
+.rs-reviews-swiper {
+  width: 100%;
+  padding: 15px 5px 30px !important;
+  overflow: hidden;
+}
+
+.rs-review-card {
+  background: #f7f7f7;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rs-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border-color: rgba(229, 9, 20, 0.15);
+}
+
+.rs-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.rs-avatar-initial {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+}
+
+.avatar-red { background-color: #e53e3e; }
+.avatar-blue { background-color: #3182ce; }
+.avatar-green { background-color: #38a169; }
+.avatar-yellow { background-color: #dd6b20; }
+.avatar-purple { background-color: #805ad5; }
+.avatar-teal { background-color: #319795; }
+
+.rs-reviewer-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.rs-review-time {
+  font-size: 12px;
+  color: #777;
+}
+
+.rs-card-rating {
+  display: flex;
+  align-items: center;
+}
+
+.rs-card-stars {
+  font-size: 14px;
+}
+
+.rs-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rs-review-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 5px;
+  margin-bottom: 8px;
+  flex-grow: 1;
+}
+
+.rs-read-more {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  text-decoration: none;
+  align-self: flex-start;
+  transition: 0.2s ease;
+}
+
+.rs-read-more:hover {
+  color: #e50914;
+  text-decoration: underline;
+}
+
+/* Swiper navigation buttons */
+.rs-swiper-prev,
+.rs-swiper-next {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  color: #4a5568 !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.rs-swiper-prev::after,
+.rs-swiper-next::after {
+  font-size: 16px !important;
+  font-weight: 800;
+}
+
+.rs-swiper-prev:hover,
+.rs-swiper-next:hover {
+  background-color: #e50914;
+  border-color: #e50914;
+  color: #fff !important;
+  box-shadow: 0 10px 15px -3px rgba(229, 9, 20, 0.25);
+}
+
+.rs-swiper-prev {
+  left: -22px;
+}
+
+.rs-swiper-next {
+  right: -22px;
+}
+
+@media (max-width: 992px) {
+  .rs-swiper-prev {
+    left: -10px;
+  }
+  .rs-swiper-next {
+    right: -10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .rs-swiper-prev {
+    left: 0px;
+  }
+  .rs-swiper-next {
+    right: 0px;
+  }
+}

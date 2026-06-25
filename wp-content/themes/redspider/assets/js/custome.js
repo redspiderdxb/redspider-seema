@@ -136,3 +136,24 @@ var swiper = new Swiper(".happSwiper", {
     },
   },
 });
+
+// Google reviews swiper
+var reviewsSwiper = new Swiper(".rs-reviews-swiper", {
+  slidesPerView: 1,
+  spaceBetween: 20,
+  loop: true,
+  navigation: {
+    nextEl: ".rs-swiper-next",
+    prevEl: ".rs-swiper-prev",
+  },
+  breakpoints: {
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 25,
+    },
+    1024: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+  },
+});
